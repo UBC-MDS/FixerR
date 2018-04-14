@@ -31,7 +31,7 @@ test_that("Value errors", {
   expect_error(get_period_rate('2018-01-01', '2100-01-03', symbol = "CAD", base_symbol = "USD", access_key = access_key),
                'ValueError: end date is not in range. Data is avaiable from 1999-01-01 to now!')
   expect_error(get_period_rate('2018-01-01', '2018-02-01', symbol = "CAD", base_symbol = "USD", access_key = access_key),
-               'ValueError: the specified duration must be less than 30 days.')
+               'ValueError: the specified period duration must be less than 30 days.')
   expect_error(get_period_rate('2018-01-01', '2018-01-03', symbol = 'AAA', base_symbol = "USD", access_key = access_key),
                "ValueError: the input symbol is not available, please check the symbols list by loading data symbols")
   expect_error(get_period_rate('2018-01-01', '2018-01-03', symbol = "CAD", base_symbol = 'AAA', access_key = access_key),

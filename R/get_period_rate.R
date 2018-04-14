@@ -1,17 +1,18 @@
-#' Get a historical currency rate from the specified date
+#' Get currency exchange rates for a specified period
 #'
+#' Get daily historical currency exchange rates between two dates of your choice, with a maximum time frame of 30 days.
 #'
-#' @param date the date of interest, a string (character vector) in the format 'YYYY-MM-DD'
+#' @param start_date the start date of interest, a string in the format 'YYYY-MM-DD'
+#' @param end_date the end date of interest, a string in the format 'YYYY-MM-DD'
 #' @param symbol currency symbol of interest, for example "CAD"
 #' @param base_symbol currency symbol as a reference base 1, for example "USD"
-#' @param access_key access key for the fixer.io api, a string.
-#' @return currency rate.
+#' @param access_key access key for the fixer.io api, a string
 #'
+#' @return a data frame of the currency exchange rates in the specified period
 #' @export
 #'
 #' @examples
-#' rate = get_historical_rate('2018-01-01', 'CAD', 'EUR', access_key = your_key)
-#'
+#' get_period_rate('2018-01-01', '2018-01-15', 'CAD', 'EUR', access_key = your_key)
 
 get_period_rate <- function(start_date, end_date, symbol="CAD", base_symbol="USD", access_key = "191cbf81c6f2962c6bd1488c674daf77"){
 
@@ -60,7 +61,7 @@ get_period_rate <- function(start_date, end_date, symbol="CAD", base_symbol="USD
   # assure the duration is less than 30 days
   duration <- as.numeric(ed-sd) + 1
   if (duration > 30) {
-    stop('ValueError: the specified duration must be less than 30 days.')
+    stop('ValueError: the specified period duration must be less than 30 days.')
   }
 
   # load symbols data from package (included)

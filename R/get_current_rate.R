@@ -1,15 +1,14 @@
-#' Get the currency rate for two specified currencies
-#'
+#' Get the latest currency rate for two specified currencies
 #'
 #' @param symbol currency symbol of interest, for example "CAD"
 #' @param base_symbol currency symbol as a reference base 1, for example "USD"
 #' @param access_key access key for the fixer.io api, a string.
-#' @return current exchange rate between these two currencies
+#' @return latest exchange rate between these two currencies
 #'
 #' @export
 #'
 #' @examples
-#' rate = get_current_rate('CAD', 'EUR', access_key = your_key)
+#' get_current_rate('CAD', 'EUR', access_key = your_key)
 #'
 
 get_current_rate <- function(symbol="CAD", base_symbol="USD", access_key = "be0ea5ac928a149aec0872afcdb3bca7"){
@@ -29,7 +28,7 @@ get_current_rate <- function(symbol="CAD", base_symbol="USD", access_key = "be0e
 
   # load symbols data from package (included)
   data("symbols")
-  
+
   # assure symbol is available
   if (!(symbol %in% symbols$symbol)){
     stop(paste0("ValueError: the input symbol is not available, please check the symbols list by loading data symbols"))

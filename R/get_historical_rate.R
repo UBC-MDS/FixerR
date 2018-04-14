@@ -1,17 +1,16 @@
 #' Get a historical currency rate from the specified date
 #'
-#'
-#' @param date the date of interest, a string (character vector) in the format 'YYYY-MM-DD'
+#' @param date the date of interest, a string in the format 'YYYY-MM-DD'
 #' @param symbol currency symbol of interest, for example "CAD"
 #' @param base_symbol currency symbol as a reference base 1, for example "USD"
 #' @param access_key access key for the fixer.io api, a string.
-#' @return currency rate.
+#' @return currency rate
 #'
 #' @export
 #'
 #' @examples
-#' rate = get_historical_rate('2018-01-01', 'CAD', 'EUR', access_key = your_key)
-#'
+#' get_historical_rate('2018-01-01', 'CAD', 'EUR', access_key = your_key)
+
 
 get_historical_rate <- function(date, symbol="CAD", base_symbol="USD", access_key = "be0ea5ac928a149aec0872afcdb3bca7"){
 
