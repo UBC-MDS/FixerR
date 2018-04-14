@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_historical_rate.R
 \name{get_historical_rate}
 \alias{get_historical_rate}
-\title{Get a historical currency rate from the specified date}
+\title{Get the historical currency exchange rate on a specified date}
 \usage{
 get_historical_rate(date, symbol = "CAD", base_symbol = "USD",
   access_key = "be0ea5ac928a149aec0872afcdb3bca7")
@@ -17,10 +17,10 @@ get_historical_rate(date, symbol = "CAD", base_symbol = "USD",
 \item{access_key}{access key for the fixer.io api, a string.}
 }
 \value{
-currency rate
+currency exchange rate on the specified date
 }
 \description{
-Get a historical currency rate from the specified date
+Get the historical currency exchange rate on a specified date
 }
 \examples{
 get_historical_rate('2018-01-01', 'CAD', 'EUR', access_key = your_key)

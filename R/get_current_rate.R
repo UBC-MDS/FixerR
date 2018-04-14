@@ -1,9 +1,9 @@
-#' Get the latest currency rate for two specified currencies
+#' Get the latest currency exchange rate for two specified currencies
 #'
 #' @param symbol currency symbol of interest, for example "CAD"
 #' @param base_symbol currency symbol as a reference base 1, for example "USD"
 #' @param access_key access key for the fixer.io api, a string.
-#' @return latest exchange rate between these two currencies
+#' @return latest currency exchange rate between these two currencies
 #'
 #' @export
 #'

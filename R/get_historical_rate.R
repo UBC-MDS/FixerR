@@ -1,10 +1,10 @@
-#' Get a historical currency rate from the specified date
+#' Get the historical currency exchange rate on a specified date
 #'
 #' @param date the date of interest, a string in the format 'YYYY-MM-DD'
 #' @param symbol currency symbol of interest, for example "CAD"
 #' @param base_symbol currency symbol as a reference base 1, for example "USD"
 #' @param access_key access key for the fixer.io api, a string.
-#' @return currency rate
+#' @return currency exchange rate on the specified date
 #'
 #' @export
 #'
