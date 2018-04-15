@@ -87,3 +87,7 @@ devtools::install_github("UBC-MDS/FixerR", build_vignettes = TRUE)
 		- a data frame of the currency exchange rates in the specified period
 	- Example: 
 		- `get_period_rate('2018-01-01', '2018-01-15', 'CAD', 'EUR', access_key = your_key)`
+		
+## Contributing
+
+We welcome all suggestions and PRs. Please find the document [here](CONTRIBUTING.md) for more information on how to contribute to this project :sparkles: :sparkles: :sparkles:

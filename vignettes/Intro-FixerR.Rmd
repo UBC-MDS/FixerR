@@ -4,7 +4,7 @@ author: "Guanchen Zhang, Shun Chi, Xiaomeng (Sophia) Wang, Xin (Alex) Guo"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Introduction to FixerR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,50 +16,112 @@ knitr::opts_chunk$set(
 )
 ```
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+## About the Package
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+`FixerR` is an R wrapper package for the [Fixer API](https://fixer.io):
 
-## Vignette Info
+> Powered by 15+ exchange rate data sources, the Fixer API is capable of delivering real-time exchange rate data for 170 world currencies. The API comes with multiple endpoints, each serving a different use case. Endpoint functionalities include getting the latest exchange rate data for all or a specific set of currencies, converting amounts from one currency to another, retrieving Time-Series data for one or multiple currencies and querying the API for daily fluctuation data.
 
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+This R package implements the APIs offered in the [free tier](https://fixer.io/product), including queries for:
 
-## Styles
+- the current exchange rates based on a reference currency
+- historical exchange rates on a given date
+- historical exchange rates within a given date range
 
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+This R package provides users the options to define the target and base currencies and the date range. Users are encouraged to sign up for your own [API key](https://fixer.io/product). To use your own API key, add an `access_key` argument to each function call. We include a default API key in the package only for unit-testing purposes.
 
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
+This R package is intended for users who need both real-time and historical exchange rates. Due to the pricing limit, this package does not implement the paid services from Fixer. However, we provide a function that works similar to the time series endpoint from the paid services.
 
-## Figures
+## Package Install
 
-The figure sizes have been customised so that you can easily put two images side-by-side. 
+`FixerR` is available on [GitHub](https://github.com/UBC-MDS/FixerR):
 
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+```devtools::install_github('UBC-MDS/FixerR')```
+
+## Load the Package
+
+```library(FixerR)```
+
+## Currency Symbols
+
+The three-letter abbreviation used in the `Fixer` API can be queried from `/symbols` endpoint in the API. These symbols will be used to define the target and base currencies as function arguments. We include in the package the table that includes all the symbols for you to look up. You can view the table from the `symbols` data set after loading the package.
+
+```{r symbols, echo=FALSE}
+symbols <- read.csv('../data/symbol_lookup_table.csv')
+knitr::kable(symbols[c(8, 28, 33, 47, 50, 74, 150),])
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+## Access Key
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
+For each function call, please add your fixer API key to the argument `access_key`.
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+## Symbol Arguments
 
-## More Examples
+Each function requires two main arguments: `symbol` and `base_symbol`. `symbol` refers to the 3-letter abbreviation of the target currency (converted to) default to `CAD`. `base_symbol` refers to the base currency default to `USD`.
 
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+## Current Exchange Rates
 
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+`get_current_rate(symbol, base_symbol, access_key)` implements the `/latest` endpoint in the fixer API which returns the _latest_ exchange rates off the base currency. The output is a number representing the exchange rate, e.g. 0.79 if 1 CAD = 0.79 USD.
+
+
+## Historical Exchange Rates
+
+`get_historical_rate(date, symbol, base_symbol, access_key)` implements the historical rates endpoint (e.g. `/YYYY-MM-DD`) which returns the exchange rates on the specified date. An additional argument, `date`, is required. `date` refers to a date string in the format `YYYY-MM-DD`, e.g. 2018-04-13. The output is a number representing the exchange rate, e.g. 0.79 if 1 CAD = 0.79 USD.
+
+
+## Period Rates
+
+`get_period_rate(start_date, end_date, symbol, base_symbol, access_key)` implements the same endpoint as `get_historical_rate` does but loops over the time interval between `start_date` and `end_date`. The output is a data frame containing a date and rate column. The data frame can be used for time series analysis.
+
+_Note:_ to avoid hitting the rate limit cap, the function is designed to work with a maximum of 30 days. If you need data from a larger interval, please use this function iteratively and add time delay between calls if necessary.
+
+
+## Example
+
+```{r echo=FALSE}
+source('../R/get_current_rate.R')
+source('../R/get_historical_rate.R')
+source('../R/get_period_rate.R')
 ```
 
-Also a quote using `>`:
+```{r current rates}
+# get the exchange rate between CAD and USD
+get_current_rate(symbol = 'CAD', base_symbol = 'USD')
+```
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+```{r historical rates}
+# get the exchange rate for CAD on 2018-04-13
+get_historical_rate(date='2018-03-10', symbol = 'CAD', base_symbol = 'USD')
+```
+
+```{r rates in time series}
+# get the exchange raes for CAD in the past 5 days
+df <- get_period_rate(start_date = '2018-04-09',
+                      end_date = '2018-04-13',
+                      symbol = 'CAD',
+                      base_symbol = 'USD')
+```
+
+```{r time_series_plot, fig.width=5, fig.height=3, fig.align='center'}
+# plot the data
+plot(df, type='o', main='USD to CAD from 2018-04-09 to 04-13')
+```
+
+For more data, call the `get_period_rate` function iteratively:
+
+```{r, eval=FALSE}
+# Get exchange rates for a month
+days <- list(batch1 = c(1,15), batch2 = c(16,30))
+
+long_data <- data.frame()
+for (d in days) {
+  df <- get_period_rate(start_date = paste0('2018-04-', d[1]),
+                        end_date = paste0('2018-04-', d[2]),
+                        symbol = 'CAD',
+                        base_symbol = 'USD')
+  long_data <- rbind(long_data, df)
+  
+  Sys.sleep(5)  # wait 5 seconds
+}
+```
+
