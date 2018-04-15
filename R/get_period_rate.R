@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @examples
-#' get_period_rate('2018-01-01', '2018-01-15', 'CAD', 'EUR', access_key = your_key)
+#' get_period_rate('2018-01-14', '2018-01-15', 'CAD', 'EUR', access_key = Sys.getenv('ACCESS_KEY'))
 
 get_period_rate <- function(start_date, end_date, symbol="CAD", base_symbol="USD", access_key){
 

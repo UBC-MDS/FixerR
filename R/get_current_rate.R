@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-#' get_current_rate('CAD', 'EUR', access_key = your_key)
+#' get_current_rate('CAD', 'EUR', access_key = Sys.getenv('ACCESS_KEY'))
 #'
 
 get_current_rate <- function(symbol="CAD", base_symbol="USD", access_key){

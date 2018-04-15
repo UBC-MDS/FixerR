@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-#' get_historical_rate('2018-01-01', 'CAD', 'EUR', access_key = your_key)
+#' get_historical_rate('2018-01-01', 'CAD', 'EUR', access_key = Sys.getenv('ACCESS_KEY'))
 
 
 get_historical_rate <- function(date, symbol="CAD", base_symbol="USD", access_key){
