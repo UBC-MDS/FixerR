@@ -55,7 +55,7 @@ ACCESS_KEY=<ADD_YOUR_ACCESS_KEY_HERE>
 The three-letter abbreviation used in the `Fixer` API can be queried from `/symbols` endpoint in the API. These symbols will be used to define the target and base currencies as function arguments. We include in the package the table that includes all the symbols for you to look up. You can view the table from the `symbols` data set after loading the package.
 
 ```{r symbols, echo=FALSE}
-symbols <- read.csv('../data/symbol_lookup_table.csv')
+data('symbols')
 knitr::kable(symbols[c(8, 28, 33, 47, 50, 74, 150),])
 ```
 
@@ -87,9 +87,6 @@ _Note:_ to avoid hitting the rate limit cap, the function is designed to work wi
 ## Example
 
 ```{r echo=FALSE}
-source('../R/get_current_rate.R')
-source('../R/get_historical_rate.R')
-source('../R/get_period_rate.R')
 access_key = Sys.getenv('ACCESS_KEY')
 ```
 
