@@ -43,26 +43,27 @@ This function can get daily historical currency exchange rates for two specified
 
 To install `FixerR`, follow the steps below:
 
-1. Please check if `devtools` has been installed. If not, open the console and enter `install.packages("devtools")` to install `devtools` from CRAN.
-2. Enter the following in the console to install `FixerR`:
-```
-devtools::install_github("UBC-MDS/FixerR", build_vignettes = TRUE)
-```
-3. Get an Fixer API Access Key from [here](https://fixer.io/product).
-4. You are all set to go!
+1. Get a Fixer API Access Key from [here](https://fixer.io/product).
 
-_Note:_ to build the vignettes, you need to run the following R code to setup your API key on your local machine _before installing the package_. Otherwise, set `build_vignettes = FALSE` or ignore the argument.
-
-```r
+2. If you want to view the vignettes, run the following R code to setup your API key on your local machine. 
+```
 Sys.setenv("ACCESS_KEY" = "YOUR_KEY")
 ```
 
-After the install, run the following to view the vignettes.
+3. Check if `devtools` has been installed. If not, run `install.packages("devtools")` to install `devtools` from CRAN.
 
-```r
+4. Run the following to install `FixerR`:
+```
+devtools::install_github("UBC-MDS/FixerR", build_vignettes = TRUE)
+```
+If you do not need the vignettes, set `build_vignettes = FALSE` or ignore the argument.
+
+5. After the installation, run the following to view the vignettes.
+```
 library(FixerR)
 browseVignettes('FixerR')
 ```
+6. You are all set to go!
 
 ## Usage
 
