@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<!-- saved from url=(0065)file:///tmp/RtmpPTsVaI/preview-39525bbdd392.dir/Intro-FixerR.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+<meta name="generator" content="pandoc">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Guanchen Zhang, Shun Chi, Xiaomeng (Sophia) Wang, Xin (Alex) Guo">
+
+<meta name="date" content="2018-04-15">
+
+<title>Introduction to FixerR</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="./Introduction to FixerR_files/MathJax.js"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+
+<body><div id="MathJax_Message" style="display: none;"></div>
+
+
+
+
+<h1 class="title toc-ignore">Introduction to FixerR</h1>
+<h4 class="author"><em>Guanchen Zhang, Shun Chi, Xiaomeng (Sophia) Wang, Xin (Alex) Guo</em></h4>
+<h4 class="date"><em>2018-04-15</em></h4>
+
+
+
+<div id="about-the-package" class="section level2">
+<h2>About the Package</h2>
+<p><code>FixerR</code> is an R wrapper package for the <a href="https://fixer.io/">Fixer API</a>:</p>
+<blockquote>
+<p>Powered by 15+ exchange rate data sources, the Fixer API is capable of delivering real-time exchange rate data for 170 world currencies. The API comes with multiple endpoints, each serving a different use case. Endpoint functionalities include getting the latest exchange rate data for all or a specific set of currencies, converting amounts from one currency to another, retrieving Time-Series data for one or multiple currencies and querying the API for daily fluctuation data.</p>
+</blockquote>
+<p>This R package implements the APIs offered in the <a href="https://fixer.io/product">free tier</a>, including queries for:</p>
+<ul>
+<li>the current exchange rates based on a reference currency</li>
+<li>historical exchange rates on a given date</li>
+<li>historical exchange rates within a given date range</li>
+</ul>
+<p>This R package provides users the options to define the target and base currencies and the date range. Users are encouraged to sign up for your own <a href="https://fixer.io/product">API key</a>. To use your own API key, add an <code>access_key</code> argument to each function call. We include a default API key in the package only for unit-testing purposes.</p>
+<p>This R package is intended for users who need both real-time and historical exchange rates. Due to the pricing limit, this package does not implement the paid services from Fixer. However, we provide a function that works similar to the time series endpoint from the paid services.</p>
+</div>
+<div id="package-install" class="section level2">
+<h2>Package Install</h2>
+<p><code>FixerR</code> is available on <a href="https://github.com/UBC-MDS/FixerR">GitHub</a>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">'UBC-MDS/FixerR'</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><em>Note:</em> to build the vignettes, you need to run the following R code to setup your API key on your local machine <em>before installing the package</em>. Otherwise, set <code>build_vignettes = FALSE</code> or ignore the argument.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.setenv</span>(<span class="st">"ACCESS_KEY"</span> =<span class="st"> "YOUR_KEY"</span>)</code></pre></div>
+<p>After the install, run the following to view the vignettes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(FixerR)
+<span class="kw">browseVignettes</span>(<span class="st">'FixerR'</span>)</code></pre></div>
+</div>
+<div id="load-the-package" class="section level2">
+<h2>Load the Package</h2>
+<p><code>library(FixerR)</code></p>
+</div>
+<div id="currency-symbols" class="section level2">
+<h2>Currency Symbols</h2>
+<p>The three-letter abbreviation used in the <code>Fixer</code> API can be queried from <code>/symbols</code> endpoint in the API. These symbols will be used to define the target and base currencies as function arguments. We include in the package the table that includes all the symbols for you to look up. You can view the table from the <code>symbols</code> data set after loading the package.</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">symbol</th>
+<th align="left">currency</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>8</td>
+<td align="left">AUD</td>
+<td align="left">Australian Dollar</td>
+</tr>
+<tr class="even">
+<td>28</td>
+<td align="left">CAD</td>
+<td align="left">Canadian Dollar</td>
+</tr>
+<tr class="odd">
+<td>33</td>
+<td align="left">CNY</td>
+<td align="left">Chinese Yuan</td>
+</tr>
+<tr class="even">
+<td>47</td>
+<td align="left">EUR</td>
+<td align="left">Euro</td>
+</tr>
+<tr class="odd">
+<td>50</td>
+<td align="left">GBP</td>
+<td align="left">British Pound Sterling</td>
+</tr>
+<tr class="even">
+<td>74</td>
+<td align="left">JPY</td>
+<td align="left">Japanese Yen</td>
+</tr>
+<tr class="odd">
+<td>150</td>
+<td align="left">USD</td>
+<td align="left">United States Dollar</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="access-key" class="section level2">
+<h2>Access Key</h2>
+<p>For each function call, please add your fixer API key to the argument <code>access_key</code>.</p>
+</div>
+<div id="symbol-arguments" class="section level2">
+<h2>Symbol Arguments</h2>
+<p>Each function requires two main arguments: <code>symbol</code> and <code>base_symbol</code>. <code>symbol</code> refers to the 3-letter abbreviation of the target currency (converted to) default to <code>CAD</code>. <code>base_symbol</code> refers to the base currency default to <code>USD</code>.</p>
+</div>
+<div id="current-exchange-rates" class="section level2">
+<h2>Current Exchange Rates</h2>
+<p><code>get_current_rate(symbol, base_symbol, access_key)</code> implements the <code>/latest</code> endpoint in the fixer API which returns the <em>latest</em> exchange rates off the base currency. The output is a number representing the exchange rate, e.g.&nbsp;0.79 if 1 CAD = 0.79 USD.</p>
+</div>
+<div id="historical-exchange-rates" class="section level2">
+<h2>Historical Exchange Rates</h2>
+<p><code>get_historical_rate(date, symbol, base_symbol, access_key)</code> implements the historical rates endpoint (e.g. <code>/YYYY-MM-DD</code>) which returns the exchange rates on the specified date. An additional argument, <code>date</code>, is required. <code>date</code> refers to a date string in the format <code>YYYY-MM-DD</code>, e.g.&nbsp;2018-04-13. The output is a number representing the exchange rate, e.g.&nbsp;0.79 if 1 CAD = 0.79 USD.</p>
+</div>
+<div id="period-rates" class="section level2">
+<h2>Period Rates</h2>
+<p><code>get_period_rate(start_date, end_date, symbol, base_symbol, access_key)</code> implements the same endpoint as <code>get_historical_rate</code> does but loops over the time interval between <code>start_date</code> and <code>end_date</code>. The output is a data frame containing a date and rate column. The data frame can be used for time series analysis.</p>
+<p><em>Note:</em> to avoid hitting the rate limit cap, the function is designed to work with a maximum of 30 days. If you need data from a larger interval, please use this function iteratively and add time delay between calls if necessary.</p>
+</div>
+<div id="example" class="section level2">
+<h2>Example</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get the exchange rate between CAD and USD</span>
+<span class="kw">get_current_rate</span>(<span class="dt">symbol =</span> <span class="st">'CAD'</span>, <span class="dt">base_symbol =</span> <span class="st">'USD'</span>, <span class="dt">access_key =</span> access_key)
+<span class="co">#&gt; [1] 1.260502</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get the exchange rate for CAD on 2018-04-13</span>
+<span class="kw">get_historical_rate</span>(<span class="dt">date=</span><span class="st">'2018-03-10'</span>,
+                    <span class="dt">symbol =</span> <span class="st">'CAD'</span>,
+                    <span class="dt">base_symbol =</span> <span class="st">'USD'</span>,
+                    <span class="dt">access_key =</span> access_key)
+<span class="co">#&gt; [1] 1.281204</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get the exchange raes for CAD in the past 5 days</span>
+df &lt;-<span class="st"> </span><span class="kw">get_period_rate</span>(<span class="dt">start_date =</span> <span class="st">'2018-04-09'</span>,
+                      <span class="dt">end_date =</span> <span class="st">'2018-04-13'</span>,
+                      <span class="dt">symbol =</span> <span class="st">'CAD'</span>,
+                      <span class="dt">base_symbol =</span> <span class="st">'USD'</span>,
+                      <span class="dt">access_key =</span> access_key)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot the data</span>
+<span class="kw">plot</span>(df, <span class="dt">type=</span><span class="st">'o'</span>, <span class="dt">main=</span><span class="st">'USD to CAD from 2018-04-09 to 04-13'</span>)</code></pre></div>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;"></p>
+<p>For more data, call the <code>get_period_rate</code> function iteratively:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get exchange rates for a month</span>
+days &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">batch1 =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">15</span>), <span class="dt">batch2 =</span> <span class="kw">c</span>(<span class="dv">16</span>,<span class="dv">30</span>))
+
+long_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>()
+for (d in days) {
+  df &lt;-<span class="st"> </span><span class="kw">get_period_rate</span>(<span class="dt">start_date =</span> <span class="kw">paste0</span>(<span class="st">'2018-04-'</span>, d[<span class="dv">1</span>]),
+                        <span class="dt">end_date =</span> <span class="kw">paste0</span>(<span class="st">'2018-04-'</span>, d[<span class="dv">2</span>]),
+                        <span class="dt">symbol =</span> <span class="st">'CAD'</span>,
+                        <span class="dt">base_symbol =</span> <span class="st">'USD'</span>,
+                        <span class="dt">access_key =</span> access_key)
+  long_data &lt;-<span class="st"> </span><span class="kw">rbind</span>(long_data, df)
+
+  <span class="kw">Sys.sleep</span>(<span class="dv">5</span>)  <span class="co"># wait 5 seconds</span>
+}</code></pre></div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+
+
+</body></html>
