@@ -40,10 +40,17 @@ This R package is intended for users who need both real-time and historical exch
 devtools::install_github('UBC-MDS/FixerR', build_vignettes = TRUE)
 ```
 
-_Note:_ to build the vignettes, you need to add the following to `.Renviron` on your local machine. Otherwise, set `build_vignettes = FALSE` or ignore the argument.
+_Note:_ to build the vignettes, you need to run the following R code to setup your API key on your local machine _before installing the package_. Otherwise, set `build_vignettes = FALSE` or ignore the argument.
 
+```r
+Sys.setenv("ACCESS_KEY" = "YOUR_KEY")
 ```
-ACCESS_KEY=<ADD_YOUR_ACCESS_KEY_HERE>
+
+After the install, run the following to view the vignettes.
+
+```r
+library(FixerR)
+browseVignettes('FixerR')
 ```
 
 ## Load the Package
@@ -131,8 +138,7 @@ for (d in days) {
                         base_symbol = 'USD',
                         access_key = access_key)
   long_data <- rbind(long_data, df)
-  
+
   Sys.sleep(5)  # wait 5 seconds
 }
 ```
-

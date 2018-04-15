@@ -23,7 +23,7 @@ This R package implements the APIs offered in the [free tier](https://fixer.io/p
 - historical exchange rates on a given date
 - historical exchange rates within a given date range (no more than 30 days)
 
-Users can define the target and base currencies and the date range. 
+Users can define the target and base currencies and the date range.
 
 ## Functions
 
@@ -43,18 +43,25 @@ This function can get daily historical currency exchange rates for two specified
 
 To install `FixerR`, follow the steps below:
 
-1. Please check if `devtools` has been installed. If not, open the console and enter `install.packages("devtools")` to install `devtools` from CRAN. 
-2. Enter the following in the console to install `FixerR`: 
+1. Please check if `devtools` has been installed. If not, open the console and enter `install.packages("devtools")` to install `devtools` from CRAN.
+2. Enter the following in the console to install `FixerR`:
 ```
 devtools::install_github("UBC-MDS/FixerR", build_vignettes = TRUE)
 ```
 3. Get an Fixer API Access Key from [here](https://fixer.io/product).
 4. You are all set to go!
 
-_Note:_ to build the vignettes, you need to add the following to `.Renviron` on your local machine. Otherwise, set `build_vignettes = FALSE` or ignore the argument.
+_Note:_ to build the vignettes, you need to run the following R code to setup your API key on your local machine _before installing the package_. Otherwise, set `build_vignettes = FALSE` or ignore the argument.
 
+```r
+Sys.setenv("ACCESS_KEY" = "YOUR_KEY")
 ```
-ACCESS_KEY=<ADD_YOUR_ACCESS_KEY_HERE>
+
+After the install, run the following to view the vignettes.
+
+```r
+library(FixerR)
+browseVignettes('FixerR')
 ```
 
 ## Usage
@@ -68,7 +75,7 @@ ACCESS_KEY=<ADD_YOUR_ACCESS_KEY_HERE>
 		- `access_key`: access key for the fixer.io api, a string.
 	- Return:
 		- latest currency exchange rate between these two currencies
-	- Example: 
+	- Example:
 		- `get_current_rate('CAD', 'EUR', access_key = your_key)`
 
 2. `get_historical_rate(date, symbol, base_symbol, access_key)`
@@ -79,7 +86,7 @@ ACCESS_KEY=<ADD_YOUR_ACCESS_KEY_HERE>
 		- `access_key`: access key for the fixer.io api, a string.
 	- Return:
 		- currency exchange rate on the specified date
-	- Example: 
+	- Example:
 		- `get_historical_rate('2018-01-01', 'CAD', 'EUR', access_key = your_key)`
 
 3. `get_period_rate(start_date, end_date, symbol, base_symbol, access_key)`
@@ -91,9 +98,9 @@ ACCESS_KEY=<ADD_YOUR_ACCESS_KEY_HERE>
 		- `access_key`: access key for the fixer.io api, a string.
 	- Return:
 		- a data frame of the currency exchange rates in the specified period
-	- Example: 
+	- Example:
 		- `get_period_rate('2018-01-01', '2018-01-15', 'CAD', 'EUR', access_key = your_key)`
-		
+
 ## Contributing
 
 We welcome all suggestions and PRs. Please find the document [here](CONTRIBUTING.md) for more information on how to contribute to this project :sparkles: :sparkles: :sparkles:
