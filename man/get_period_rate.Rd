@@ -5,7 +5,7 @@
 \title{Get currency exchange rates for a specified period}
 \usage{
 get_period_rate(start_date, end_date, symbol = "CAD", base_symbol = "USD",
-  access_key = "191cbf81c6f2962c6bd1488c674daf77")
+  access_key)
 }
 \arguments{
 \item{start_date}{the start date of interest, a string in the format 'YYYY-MM-DD'}
@@ -25,5 +25,5 @@ a data frame of the currency exchange rates in the specified period
 Get daily historical currency exchange rates between two dates of your choice, with a maximum time frame of 30 days.
 }
 \examples{
-get_period_rate('2018-01-01', '2018-01-15', 'CAD', 'EUR', access_key = your_key)
+get_period_rate('2018-01-14', '2018-01-15', 'CAD', 'EUR', access_key = Sys.getenv('ACCESS_KEY'))
 }

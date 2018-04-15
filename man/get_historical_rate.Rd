@@ -4,8 +4,7 @@
 \alias{get_historical_rate}
 \title{Get the historical currency exchange rate on a specified date}
 \usage{
-get_historical_rate(date, symbol = "CAD", base_symbol = "USD",
-  access_key = "be0ea5ac928a149aec0872afcdb3bca7")
+get_historical_rate(date, symbol = "CAD", base_symbol = "USD", access_key)
 }
 \arguments{
 \item{date}{the date of interest, a string in the format 'YYYY-MM-DD'}
@@ -23,5 +22,5 @@ currency exchange rate on the specified date
 Get the historical currency exchange rate on a specified date
 }
 \examples{
-get_historical_rate('2018-01-01', 'CAD', 'EUR', access_key = your_key)
+get_historical_rate('2018-01-01', 'CAD', 'EUR', access_key = Sys.getenv('ACCESS_KEY'))
 }

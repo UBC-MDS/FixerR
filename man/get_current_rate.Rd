@@ -4,8 +4,7 @@
 \alias{get_current_rate}
 \title{Get the latest currency exchange rate for two specified currencies}
 \usage{
-get_current_rate(symbol = "CAD", base_symbol = "USD",
-  access_key = "be0ea5ac928a149aec0872afcdb3bca7")
+get_current_rate(symbol = "CAD", base_symbol = "USD", access_key)
 }
 \arguments{
 \item{symbol}{currency symbol of interest, for example "CAD"}
@@ -21,6 +20,6 @@ latest currency exchange rate between these two currencies
 Get the latest currency exchange rate for two specified currencies
 }
 \examples{
-get_current_rate('CAD', 'EUR', access_key = your_key)
+get_current_rate('CAD', 'EUR', access_key = Sys.getenv('ACCESS_KEY'))
 
 }
