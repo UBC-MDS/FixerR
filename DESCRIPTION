@@ -2,7 +2,7 @@ Package: FixerR
 Type: Package
 Title: Get currency exchange rates
 Version: 1.0.0
-Author@R: c(
+Authors@R: c(
     person("Alex", "Guo", email = "alex.guo@alumni.ubc.ca", role = c("aut")),
     person("Shun", "Chi", email = "shun.chi@alumni.ubc.ca", role = c("aut")),
     person("Sophia", "Wang", email = "xiaosophiameng@alumni.ubc.ca", role = c("aut")),
