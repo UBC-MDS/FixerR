@@ -14,7 +14,7 @@
 #' @examples
 #' get_period_rate('2018-01-01', '2018-01-15', 'CAD', 'EUR', access_key = your_key)
 
-get_period_rate <- function(start_date, end_date, symbol="CAD", base_symbol="USD", access_key = "191cbf81c6f2962c6bd1488c674daf77"){
+get_period_rate <- function(start_date, end_date, symbol="CAD", base_symbol="USD", access_key){
 
   # assure input types:
   if(!is.character(start_date)){

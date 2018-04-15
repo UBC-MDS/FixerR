@@ -13,7 +13,17 @@ DSCI 525 Group Project, April 2018
 
 ## Overview
 
+`FixerR` is an R API wrapper package for the APIs provided by [Fixer](https://fixer.io) for current and historical foreign currency exchange rates.
 
+> Powered by 15+ exchange rate data sources, the Fixer API is capable of delivering real-time exchange rate data for 170 world currencies. The API comes with multiple endpoints, each serving a different use case. Endpoint functionalities include getting the latest exchange rate data for all or a specific set of currencies, converting amounts from one currency to another, retrieving Time-Series data for one or multiple currencies and querying the API for daily fluctuation data.
+
+This R package implements the APIs offered in the [free tier](https://fixer.io/product), including queries for:
+
+- the current exchange rates based on a reference currency
+- historical exchange rates on a given date
+- historical exchange rates within a given date range (no more than 30 days)
+
+Users can define the target and base currencies and the date range. 
 
 ## Functions
 
@@ -38,7 +48,8 @@ To install `FixerR`, follow the steps below:
 ```
 devtools::install_github("UBC-MDS/FixerR", build_vignettes = TRUE)
 ```
-3. You are all set to go!
+3. Get an Fixer API Access Key from [here](https://fixer.io/product).
+4. You are all set to go!
 
 ## Usage
 

@@ -11,7 +11,7 @@
 #' get_current_rate('CAD', 'EUR', access_key = your_key)
 #'
 
-get_current_rate <- function(symbol="CAD", base_symbol="USD", access_key = "be0ea5ac928a149aec0872afcdb3bca7"){
+get_current_rate <- function(symbol="CAD", base_symbol="USD", access_key){
 
   # assure input types:
 
