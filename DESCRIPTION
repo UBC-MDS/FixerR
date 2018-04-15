@@ -1,12 +1,17 @@
 Package: FixerR
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Title: Get currency exchange rates
+Version: 0.0.1
+Author: c(
+  person("Alex", "Guo", email = "alex.guo@alumni.ubc.ca", role = c("aut")),
+  person("Shun", "Chi", email = "shun.chi@alumni.ubc.ca", role = c("aut")),
+  person("Sophia", "Wang", email = "xiaosophiameng@alumni.ubc.ca", role = c("aut")),
+  person("Guanchen", "Zhang", email = "guanchen.zhang@alumni.ubc.ca", role = c("aut", "cre"))
+)
+Description: R wrapper for the Fixer APIs that get the latest and 
+    historical currency exchange rates.
+Depends: R (>= 3.4.1)
+License: MIT
 Encoding: UTF-8
 LazyData: true
 Suggests: testthat,
