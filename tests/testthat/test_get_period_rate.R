@@ -1,6 +1,6 @@
 context("Testing get_period_rate()")
 
-access_key = "191cbf81c6f2962c6bd1488c674daf77"
+access_key = Sys.getenv('ACCESS_KEY')
 
 # Exceptional Cases
 

@@ -36,7 +36,15 @@ This R package is intended for users who need both real-time and historical exch
 
 `FixerR` is available on [GitHub](https://github.com/UBC-MDS/FixerR):
 
-```devtools::install_github('UBC-MDS/FixerR')```
+```r
+devtools::install_github('UBC-MDS/FixerR', build_vignettes = TRUE)
+```
+
+_Note:_ to build the vignettes, you need to add the following to `.Renviron` on your local machine. Otherwise, set `build_vignettes = FALSE` or ignore the argument.
+
+```
+ACCESS_KEY=<ADD_YOUR_ACCESS_KEY_HERE>
+```
 
 ## Load the Package
 
@@ -82,16 +90,20 @@ _Note:_ to avoid hitting the rate limit cap, the function is designed to work wi
 source('../R/get_current_rate.R')
 source('../R/get_historical_rate.R')
 source('../R/get_period_rate.R')
+access_key = Sys.getenv('ACCESS_KEY')
 ```
 
 ```{r current rates}
 # get the exchange rate between CAD and USD
-get_current_rate(symbol = 'CAD', base_symbol = 'USD')
+get_current_rate(symbol = 'CAD', base_symbol = 'USD', access_key = access_key)
 ```
 
 ```{r historical rates}
 # get the exchange rate for CAD on 2018-04-13
-get_historical_rate(date='2018-03-10', symbol = 'CAD', base_symbol = 'USD')
+get_historical_rate(date='2018-03-10',
+                    symbol = 'CAD',
+                    base_symbol = 'USD',
+                    access_key = access_key)
 ```
 
 ```{r rates in time series}
@@ -99,7 +111,8 @@ get_historical_rate(date='2018-03-10', symbol = 'CAD', base_symbol = 'USD')
 df <- get_period_rate(start_date = '2018-04-09',
                       end_date = '2018-04-13',
                       symbol = 'CAD',
-                      base_symbol = 'USD')
+                      base_symbol = 'USD',
+                      access_key = access_key)
 ```
 
 ```{r time_series_plot, fig.width=5, fig.height=3, fig.align='center'}
@@ -118,7 +131,8 @@ for (d in days) {
   df <- get_period_rate(start_date = paste0('2018-04-', d[1]),
                         end_date = paste0('2018-04-', d[2]),
                         symbol = 'CAD',
-                        base_symbol = 'USD')
+                        base_symbol = 'USD',
+                        access_key = access_key)
   long_data <- rbind(long_data, df)
   
   Sys.sleep(5)  # wait 5 seconds

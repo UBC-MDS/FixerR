@@ -51,6 +51,12 @@ devtools::install_github("UBC-MDS/FixerR", build_vignettes = TRUE)
 3. Get an Fixer API Access Key from [here](https://fixer.io/product).
 4. You are all set to go!
 
+_Note:_ to build the vignettes, you need to add the following to `.Renviron` on your local machine. Otherwise, set `build_vignettes = FALSE` or ignore the argument.
+
+```
+ACCESS_KEY=<ADD_YOUR_ACCESS_KEY_HERE>
+```
+
 ## Usage
 
 `library(FixerR)`

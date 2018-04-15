@@ -1,6 +1,6 @@
 context("Testing get_historical_rate()")
 
-access_key = "be0ea5ac928a149aec0872afcdb3bca7"
+access_key = Sys.getenv('ACCESS_KEY')
 
 # Exceptional Cases
 
